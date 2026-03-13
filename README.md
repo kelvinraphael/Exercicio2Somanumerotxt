@@ -10,24 +10,15 @@
 
 # 1. Descrição do Problema
 
-Descreva o problema computacional resolvido pelo programa.
+O problema consiste em somar todos os valores contidos em um arquivo de números inteiros (numero2.txt), que possui 10 milhões de linhas. O objetivo é avaliar o desempenho da soma usando execução serial e paralela com diferentes números de threads, medindo tempo, speedup e eficiência.
 
-## Orientações para preenchimento
+Algoritmo utilizado: soma sequencial por linha, paralelizada dividindo o arquivo em blocos e somando cada bloco em threads.
 
-Explique:
+Tamanho da entrada: 10.000.000 números.
 
-* Qual problema foi implementado
-* Qual algoritmo foi utilizado
-* Qual o tamanho da entrada utilizada nos testes
-* Qual o objetivo da paralelização
+Objetivo da paralelização: reduzir o tempo de execução da soma utilizando múltiplas threads.
 
-**Questões que devem ser respondidas:**
-
-* Qual é o objetivo do programa?
-* Qual o volume de dados processado?
-* Qual algoritmo foi utilizado?
-* Qual a complexidade aproximada do algoritmo?
-
+Complexidade aproximada: O algoritmo tem complexidade O(n), onde n é o número de linhas do arquivo.
 ---
 
 # 2. Ambiente Experimental
@@ -40,48 +31,43 @@ Informar as características do hardware e software utilizados na execução dos
 
 | Item                        | Descrição |
 | --------------------------- | --------- |
-| Processador                 |           |
-| Número de núcleos           |           |
-| Memória RAM                 |           |
-| Sistema Operacional         |           |
-| Linguagem utilizada         |           |
+| Processador                 |12th Gen Intel(R) Core(TM) i5-12500            |
+| Número de núcleos           |6 nucleos           |
+| Memória RAM                 |16,0 GB            |
+| Sistema Operacional         |Windows 11           |
+| Linguagem utilizada         |Python 3   |
 | Biblioteca de paralelização |           |
-| Compilador / Versão         |           |
+| Compilador / Versão         |Python 3.10|
 
 ---
 
 # 3. Metodologia de Testes
 
-Explique como os experimentos foram conduzidos.
+Medição de tempo: Utilizou-se time.time() antes e depois da execução da soma.
 
-## Orientações
+Número de execuções: 1 execução por configuração (arquivo grande).
 
-Descrever:
+Entrada utilizada: arquivo numero2.txt com 10 milhões de números.
 
-* Como o tempo de execução foi medido
-* Quantas execuções foram realizadas
-* Se foi utilizada média dos tempos
-* Qual tamanho da entrada foi usado
+Configurações testadas:
 
-### Configurações testadas
+1 thread (serial)
 
-Os experimentos devem ser realizados nas seguintes configurações:
+2 threads
 
-* 1 thread/processo (versão serial)
-* 2 threads/processos
-* 4 threads/processos
-* 8 threads/processos
-* 12 threads/processos
+4 threads
 
-### Procedimento experimental
+6 threads
 
-Descrever:
+12 threads
 
-* Número de execuções para cada configuração
-* Forma de cálculo da média
-* Condições de execução (ex: máquina dedicada, carga do sistema, etc.)
+Procedimento experimental:
 
----
+O arquivo foi lido em blocos de 1 milhão de linhas.
+
+Cada bloco foi distribuído entre as threads, que somaram os valores de forma paralela.
+
+O tempo de execução foi registrado em segundos.
 
 # 4. Resultados Experimentais
 
@@ -94,38 +80,21 @@ Preencha a tabela com os **tempos médios de execução** obtidos.
 
 | Nº Threads/Processos | Tempo de Execução (s) |
 | -------------------- | --------------------- |
-| 1                    |                       |
-| 2                    |                       |
-| 4                    |                       |
-| 8                    |                       |
-| 12                   |                       |
+| 1                    |      1,324963         |
+| 2                    |      1.280188         |
+| 4                    |      1.240317         |
+| 8                    |      1.208345         |
+| 12                   |      1.289748         |
 
 ---
 
 # 5. Cálculo de Speedup e Eficiência
 
-## Fórmulas Utilizadas
+Fórmulas utilizadas:
 
-### Speedup
-
-```
 Speedup(p) = T(1) / T(p)
-```
 
-Onde:
-
-* **T(1)** = tempo da execução serial
-* **T(p)** = tempo com p threads/processos
-
-### Eficiência
-
-```
 Eficiência(p) = Speedup(p) / p
-```
-
-Onde:
-
-* **p** = número de threads ou processos
 
 ---
 
@@ -135,92 +104,74 @@ Preencha a tabela abaixo utilizando os tempos medidos.
 
 | Threads/Processos | Tempo (s) | Speedup | Eficiência |
 | ----------------- | --------- | ------- | ---------- |
-| 1                 |           | 1.0     | 1.0        |
-| 2                 |           |         |            |
-| 4                 |           |         |            |
-| 8                 |           |         |            |
-| 12                |           |         |            |
+| 1                 |1.356551    1.0     | 1.0        |
+| 2                 |1.280188   | 1.06   | 0,53       |
+| 4                 |1.240317   | 1.09   | 0,27       |
+| 8                 |1.208345   | 1.12   | 0,14       |
+| 12                |1.289748   | 1,05   | 0,9        |
 
 ---
 
 # 7. Gráfico de Tempo de Execução
 
-Construa um gráfico mostrando o **tempo de execução em função do número de threads/processos**.
+Orientações:
 
-## Orientações
+Eixo X: número de threads/processos
 
-* Eixo X: número de threads/processos
-* Eixo Y: tempo de execução (segundos)
+Eixo Y: tempo de execução (s)
 
-Inserir o gráfico abaixo:
-
-![Gráfico Tempo Execução](graficos/tempo_execucao.png)
+Observação: Gráfico mostra que o tempo não diminui significativamente com o aumento de threads.
+file:///C:/Users/aluno/Downloads/execucao.png
 
 ---
 
 # 8. Gráfico de Speedup
 
-Construa um gráfico mostrando o **speedup obtido**.
-
-## Orientações
-
-* Eixo X: número de threads/processos
-* Eixo Y: speedup
-* Incluir também a **linha de speedup ideal (linear)** para comparação
-
+Observação: O speedup obtido é menor que 1, indicando que o paralelismo via threads não acelerou a soma devido ao GIL no Python.
 Inserir o gráfico abaixo:
 
-![Gráfico Speedup](graficos/speedup.png)
+file:///C:/Users/aluno/Pictures/Screenshots/speedup.png
 
 ---
 
 # 9. Gráfico de Eficiência
 
-Construa um gráfico mostrando a **eficiência da paralelização**.
-
-## Orientações
-
-* Eixo X: número de threads/processos
-* Eixo Y: eficiência
-* Valores entre 0 e 1
-
+Observação: A eficiência cai rapidamente à medida que o número de threads aumenta, mostrando overhead da paralelização.
 Inserir o gráfico abaixo:
 
-![Gráfico Eficiência](graficos/eficiencia.png)
+file:///C:/Users/aluno/Pictures/Screenshots/eficiencia.png
 
 ---
 
 # 10. Análise dos Resultados
 
-Realize uma análise crítica dos resultados obtidos.
+O speedup obtido não foi próximo do ideal.
 
-## Questões a serem respondidas
+A aplicação não apresentou escalabilidade com threads devido ao GIL.
 
-* O speedup obtido foi próximo do ideal?
-* A aplicação apresentou escalabilidade?
-* Em qual ponto a eficiência começou a cair?
-* O número de threads ultrapassa o número de núcleos físicos da máquina?
-* Houve overhead de paralelização?
+A eficiência começou a cair já a partir de 2 threads.
 
-Discutir possíveis causas para:
+O número de threads testado ultrapassa o número de núcleos físicos, agravando o overhead.
 
-* perda de desempenho
-* gargalos no algoritmo
-* sincronização entre threads/processos
-* comunicação entre processos
-* contenção de memória ou cache
+Houve overhead de paralelização e contenção de memória, já que as threads compartilham o mesmo processo e não executam em paralelo de verdade para operações CPU-bound.
+
+Possíveis causas:
+
+Perda de desempenho causada pelo overhead de criação e gerenciamento de threads.
+
+Sincronização mínima, mas ainda necessária para coletar resultados.
+
+Comunicação entre threads e contenção de memória/cache.
 
 ---
 
 # 11. Conclusão
 
-Apresente as conclusões do experimento.
+O paralelismo via threads não trouxe ganho significativo de desempenho para a soma de números inteiros em Python.
 
-## Sugestões de pontos a comentar
+O melhor desempenho foi obtido com 1 thread (serial).
 
-* O paralelismo trouxe ganho significativo de desempenho?
-* Qual foi o melhor número de threads/processos?
-* O programa escala bem com o aumento do paralelismo?
-* Quais melhorias poderiam ser feitas na implementação?
+O programa não escala bem com o aumento do número de threads.
 
----
+Para melhoria: usar multiprocessing ou bibliotecas vetorizadas como NumPy, que contornam o GIL e permitem verdadeiro paralelismo em CPU-bound.
+
