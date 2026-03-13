@@ -130,7 +130,7 @@ file:///C:/Users/aluno/Downloads/execucao.png
 Observação: O speedup obtido é menor que 1, indicando que o paralelismo via threads não acelerou a soma devido ao GIL no Python.
 Inserir o gráfico abaixo:
 
-file:///C:/Users/aluno/Pictures/Screenshots/speedup.png
+
 
 ---
 
